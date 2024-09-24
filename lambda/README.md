@@ -61,6 +61,25 @@ Identity program:
     `lambda_.__LAMBDA-SYNTAX_Val_Id_Exp`(#token("x","Id"),#token("x","Id"))
     ```
 
+Issues with changes I want:
+- Tried `"λ" Id "." Exp`, which kompiles ok, but krun complains
+  `1:0:1:0:syntax error: unexpected Î`.
+- Changing it to `"L" Id "." Exp` gives:
+  `id.l:1:4:1:4:syntax error, unexpected ., expecting end of file`
+- Even changing it to "lambd" breaks as "L" above.
+- Also did clean build just to make sure.
+- Defining as `"Lambda"` and making it parse `lambda` dumps core.
+- ??? What is so special about `"lambda"`?
+
+Comments:
+- I need comments in my programs, so I need to add them to the parser.
+- Not clear how to do this; [[so 62665093]] says "declare built-in sort
+  `#Layout` to be the concatenation via pipes of a set of regular
+  expression terminals (i.e., `r"//[^\\n]*"`). Any tokens which lex as one
+  of these tokens are simply discarded by the lexer and the parser does not
+  even see them."
+
 
 <!-------------------------------------------------------------------->
 [kplt]: https://github.com/runtimeverification/pl-tutorial/tree/master/1_k
+[so 62665093]: https://stackoverflow.com/a/62665093/107294
