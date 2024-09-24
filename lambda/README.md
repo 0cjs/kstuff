@@ -70,6 +70,8 @@ Issues with changes I want:
 - Also did clean build just to make sure.
 - Defining as `"Lambda"` and making it parse `lambda` dumps core.
 - ??? What is so special about `"lambda"`?
+- Apparently my clean build wasn't clean enough; `rm -rf lambda-kompiled`
+  a second time fixed it all, including UTF-8.
 
 Comments:
 - I need comments in my programs, so I need to add them to the parser.
@@ -78,6 +80,8 @@ Comments:
   expression terminals (i.e., `r"//[^\\n]*"`). Any tokens which lex as one
   of these tokens are simply discarded by the lexer and the parser does not
   even see them."
+- Have an example in my code, but fails due to double definition of
+  `#Lambda` sort; bug in K?
 
 
 <!-------------------------------------------------------------------->
