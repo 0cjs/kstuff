@@ -17,8 +17,11 @@ Building:
   either.
 - Wants clang for LLVM compilation; for the moment just go with `--backend
   kore`. Not sure what that produces, but it builds.
+- However, `krun` fails with `Backend kore not supported.` Ok, need to
+  switch to a container with all the appropriate stuff installed for
+  LLVM to work.
 
-Code:
+Initial Syntax:
 - `module … endmodule` for module definitions
   - ??? Any diff between a "syntax" and "semantics" module? Looks like via
     the imports they all just get combined into one, anyway.
@@ -46,6 +49,17 @@ Code:
   - Domains: `INT`, `BOOL`, `STRING`, `BASIC-K`, `LIST`, `K-IO`, `MAP`,
     `SET`, `ID`, `K-EQUAL`.
 
+Identity program:
+- Tutorial `identity.lambda` is my `id.l`, same contents: `lambda x . x`.
+- `krun` produces different output:
+  - Tutorial: `<k> lambda x . x </k>`
+  - Mine: `<k> lambda x . x ~> .K </k>`
+  - The `<k>…</k>` is an automatically-created configuration of one cell
+    because definition did not supply a configuration.
+- `kast` prints the AST; ugly as hell:
+    ```
+    `lambda_.__LAMBDA-SYNTAX_Val_Id_Exp`(#token("x","Id"),#token("x","Id"))
+    ```
 
 
 <!-------------------------------------------------------------------->
