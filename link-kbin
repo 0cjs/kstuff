@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+trap 'ec=$?; echo "INTERNAL ERROR $ec"; exit $ec' ERR
+
+#   K, once built, appears to require the following Deb12 packages at runtime:
+#   java-17-openjdk bison flex
+
+PROJDIR=$(cd $(dirname "$0") && pwd -P)
+kbin="$HOME/co/public/gh/runtimeverification/k/k-distribution/target/release/k/bin"
+
+if [[ ! -d $kbin ]]; then
+    echo 1>&2 "not found: $kbin"
+    exit 3
+else
+    cd "$PROJDIR"
+    [[ -h .kbin ]] || ln -s "$kbin" .kbin
+fi
